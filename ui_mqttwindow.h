@@ -62,6 +62,8 @@ public:
 
         connectButton = new QPushButton(centralwidget);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
+        connectButton->setAutoDefault(false);
+        connectButton->setFlat(false);
 
         gridLayout->addWidget(connectButton, 1, 2, 2, 1);
 
@@ -90,6 +92,9 @@ public:
         mqttWindow->setCentralWidget(centralwidget);
 
         retranslateUi(mqttWindow);
+
+        connectButton->setDefault(false);
+
 
         QMetaObject::connectSlotsByName(mqttWindow);
     } // setupUi

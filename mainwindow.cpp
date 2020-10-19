@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(TR("用户登录demo"));
     setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint);    // 禁止最大化按钮
     setFixedSize(this->width(),this->height());                     // 禁止拖动窗口大小
+    //mw = new mqttWindow();
+    //mw->show();
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)), this, SLOT(afterReply(QNetworkReply*)));
 
@@ -38,8 +40,8 @@ void MainWindow::afterReply(QNetworkReply *)
             setWindowTitle(TR("登录成功"));
             Sleep(500);
             this->close();
-            mw = new mqttWindow();
-            mw->show();
+           // mw = new mqttWindow();
+           // mw->show();
         }
         else
         {
@@ -53,6 +55,8 @@ void MainWindow::afterReply(QNetworkReply *)
     reply->deleteLater();
 }
 
+
+
 void MainWindow::on_loginButton_clicked()
 {
     //点击登录按钮后向服务端发送get请求
@@ -64,8 +68,10 @@ void MainWindow::on_loginButton_clicked()
 
     if(!ui->userLineEdit->text().isEmpty()&&!ui->passwordLineEdit->text().isEmpty())
     {
-        QString str1 = ui->userLineEdit->text();
-        QString str2 = ui->passwordLineEdit->text();
+        //QString str1 = ui->userLineEdit->text();
+        //QString str2 = ui->passwordLineEdit->text();
+        QString str1 = "2084teamyyz";
+        QString str2 = "2084teamyyz";
 
         QString str3 = QString("%1/%2").arg(str1.data(),str2.data());
         str = str + str3;

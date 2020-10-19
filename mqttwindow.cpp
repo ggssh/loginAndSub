@@ -26,7 +26,7 @@ mqttWindow::mqttWindow(QWidget *parent) :
     //为方便使用，默认用户名和密码为Test-Windows
     m_client->setUsername("Test-Windows");
     m_client->setPassword("Test-Windows");
-
+    hhh();
     connect(m_client, &QMqttClient::connected, this, &mqttWindow::mySubscribe);
 
     connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic){
@@ -76,8 +76,7 @@ void mqttWindow::myConnect()
     }
 }
 
-void mqttWindow::on_connectButton_clicked()
-{
+void mqttWindow::hhh(){
     if(m_client->state() == QMqttClient::Disconnected)
     {
         ui->connectButton->setText(TR("断开连接"));
@@ -88,4 +87,20 @@ void mqttWindow::on_connectButton_clicked()
         ui->connectButton->setText(TR("连接"));
         m_client->disconnectFromHost();
     }
+}
+void mqttWindow::on_connectButton_clicked()
+{
+/*
+     if(m_client->state() == QMqttClient::Disconnected)
+    {
+        ui->connectButton->setText(TR("断开连接"));
+        m_client->connectToHost();
+    }
+    else
+    {
+        ui->connectButton->setText(TR("连接"));
+        m_client->disconnectFromHost();
+    }
+
+*/
 }

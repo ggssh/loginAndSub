@@ -23,7 +23,7 @@ public:
 private slots:
     void mySubscribe();
     void myConnect();
-
+    void hhh();
     void on_connectButton_clicked();
 
 private:

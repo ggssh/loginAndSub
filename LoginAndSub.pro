@@ -44,3 +44,16 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/ -lQt5Mqtt
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/ -lQt5Mqttd
+else:unix: LIBS += -L$$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/ -lQt5Mqtt
+
+INCLUDEPATH += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/include
+DEPENDPATH += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/include
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/libQt5Mqtt.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/libQt5Mqttd.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/Qt5Mqtt.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/Qt5Mqttd.lib
+else:unix: PRE_TARGETDEPS += $$PWD/../_mqtt/build-qtmqtt-Desktop_Qt_5_14_2_MSVC2017_64bit-Release/lib/libQt5Mqtt.a
