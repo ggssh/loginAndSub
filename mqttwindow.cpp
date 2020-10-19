@@ -20,6 +20,7 @@ mqttWindow::mqttWindow(QWidget *parent) :
     setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint);    // 禁止最大化按钮
     setFixedSize(this->width(),this->height());                     // 禁止拖动窗口大小
 
+
     m_client = new QMqttClient(this);
     m_client->setHostname("47.92.145.61");
     m_client->setPort(1883);
@@ -28,7 +29,7 @@ mqttWindow::mqttWindow(QWidget *parent) :
     m_client->setPassword("Test-Windows");
     hhh();
     connect(m_client, &QMqttClient::connected, this, &mqttWindow::mySubscribe);
-
+    connect(m_client,&QMqttClient::connected,this,&mqttWindow::trayicon);
     connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic){
         const QString content = QDateTime::currentDateTime().toString() + TR("收到来自订阅主题: ") + topic.name() + TR(" 内容: ") + message + QLatin1Char('\n');
         ui->editLog->insertPlainText(content);
@@ -103,4 +104,17 @@ void mqttWindow::on_connectButton_clicked()
     }
 
 */
+}
+
+void mqttWindow::trayicon(){
+        this->hide();
+        //新建QSystemTrayIcon对象
+        msystemicon = new QSystemTrayIcon(this);
+        //新建托盘要显示的icon
+        QIcon icon=QIcon("1.jpg");
+        //将icon设置到QSystemTrayIcon对象中
+        msystemicon->setIcon(icon);
+        //mSystemTrayIcon->setToolTip(QObject::trUtf8("测试系统托盘图标"));
+        msystemicon->show();
+
 }
