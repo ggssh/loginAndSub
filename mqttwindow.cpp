@@ -22,7 +22,7 @@ mqttWindow::mqttWindow(QWidget *parent) :
 
 
     m_client = new QMqttClient(this);
-    m_client->setHostname("47.92.145.61");
+    m_client->setHostname("150.158.186.235");
     m_client->setPort(1883);
     //为方便使用，默认用户名和密码为Test-Windows
     m_client->setUsername("Test-Windows");

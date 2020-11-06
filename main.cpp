@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     autostart();
     QApplication a(argc, argv);
-   // MainWindow w;
+    //MainWindow w;
     //w.show();
     mqttWindow mw;
     mw.show();

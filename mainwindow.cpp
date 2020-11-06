@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(TR("用户登录demo"));
     setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint);    // 禁止最大化按钮
     setFixedSize(this->width(),this->height());                     // 禁止拖动窗口大小
-    //mw = new mqttWindow();
+   // mw = new mqttWindow();
     //mw->show();
     manager = new QNetworkAccessManager(this);
     connect(manager,SIGNAL(finished(QNetworkReply*)), this, SLOT(afterReply(QNetworkReply*)));
@@ -40,8 +40,8 @@ void MainWindow::afterReply(QNetworkReply *)
             setWindowTitle(TR("登录成功"));
             Sleep(500);
             this->close();
-           // mw = new mqttWindow();
-           // mw->show();
+            mw = new mqttWindow();
+            mw->show();
         }
         else
         {
