@@ -16,8 +16,10 @@ mqttWindow::mqttWindow(QWidget *parent) :
     ui(new Ui::mqttWindow)
 {
     ui->setupUi(this);
+    setWindowFlags(windowFlags()&~Qt::Popup);
     setWindowTitle(TR("MQTT Client Demo"));
     setWindowFlags(windowFlags()&~Qt::WindowMaximizeButtonHint);    // 禁止最大化按钮
+    setWindowFlags(windowFlags()&~Qt::WindowCloseButtonHint);
     setFixedSize(this->width(),this->height());                     // 禁止拖动窗口大小
 
 
@@ -28,6 +30,7 @@ mqttWindow::mqttWindow(QWidget *parent) :
     m_client->setUsername("Test-Windows");
     m_client->setPassword("Test-Windows");
     hhh();
+   // connect(m_client,&QMqttClient::disconnected,this,&mqttWindow::trayicon);
     connect(m_client, &QMqttClient::connected, this, &mqttWindow::mySubscribe);
     connect(m_client,&QMqttClient::connected,this,&mqttWindow::trayicon);
     connect(m_client, &QMqttClient::messageReceived, this, [this](const QByteArray &message, const QMqttTopicName &topic){
@@ -82,6 +85,7 @@ void mqttWindow::hhh(){
     {
         ui->connectButton->setText(TR("断开连接"));
         m_client->connectToHost();
+
     }
     else
     {
@@ -105,6 +109,7 @@ void mqttWindow::on_connectButton_clicked()
 
 */
 }
+
 
 void mqttWindow::trayicon(){
         this->hide();
